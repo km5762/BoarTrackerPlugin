@@ -8,6 +8,8 @@ namespace BoarTrackerPlugin
 {
     public class BoarPlugin : IPlugin
     {
+        BoarTracker bt;
+
         public string Author
         {
             get { return "km5762"; }
@@ -39,17 +41,20 @@ namespace BoarTrackerPlugin
 
         public void OnLoad()
         {
-            BoarDisplay _display = new BoarDisplay();
-            //_display.Show();
-            //BoarTracker bt = new BoarTracker();
+            BoarDisplay display = new BoarDisplay();
+            bt = new BoarTracker(display);
 
-            //GameEvents.OnGameStart.Add(bt.GameStart);
-            //GameEvents.OnInMenu.Add(bt.InMenu);
-            //GameEvents.OnTurnStart.Add(bt.TurnStart);
+            GameEvents.OnGameStart.Add(bt.GameStart);
+            GameEvents.OnInMenu.Add(bt.InMenu);
+            GameEvents.OnPlayerPlayToGraveyard.Add(bt.PlayerPlayToGraveyard);
         }
 
         public void OnUnload()
         {
+            if (bt != null)
+            {
+                bt.Dispose();
+            }
         }
 
         public void OnUpdate()

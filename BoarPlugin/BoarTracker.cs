@@ -13,22 +13,35 @@ namespace BoarTrackerPlugin
 {
     internal class BoarTracker
     {
-        private int _boarCount = 0;
+        private BoarDisplay display;
 
-        public BoarTracker()
+        public BoarTracker(BoarDisplay display)
         {
+            this.display = display;
         }
 
         internal void GameStart()
         {
+            this.display.resetCounter();
+            this.display.Show();
         }
 
         internal void InMenu()
         {
+            this.display.Hide();
         }
 
-        internal void TurnStart(ActivePlayer player)
+        internal void PlayerPlayToGraveyard(Card card)
         {
+            if (card.Name == "Elwynn Boar")
+            {
+                this.display.incrementCounter();
+            }
+        }
+        
+        internal void Dispose()
+        {
+            this.display.Close();
         }
     }
 }

@@ -51,18 +51,24 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BoarDisplay.xaml.cs">
-      <DependentUpon>BoarDisplay.xaml</DependentUpon>
+    <Compile Include="BoarDisplay.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BoarDisplay.Designer.cs">
+      <DependentUpon>BoarDisplay.cs</DependentUpon>
     </Compile>
     <Compile Include="BoarTracker.cs" />
     <Compile Include="BoarPlugin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="BoarDisplay.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
+    <EmbeddedResource Include="BoarDisplay.resx">
+      <DependentUpon>BoarDisplay.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>copy "C:\Users\d4wgr\source\repos\BoarTrackerPlugin\BoarPlugin\bin\Debug\BoarTrackerPlugin.dll" "C:\Users\d4wgr\AppData\Roaming\HearthstoneDeckTracker\Plugins"
+</PostBuildEvent>
+  </PropertyGroup>
 </Project>
